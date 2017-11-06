@@ -11,8 +11,9 @@ public partial class ListaPedidosGerente : System.Web.UI.Page
   //Atributos de la clase.
   String cadSql, rfc;
   GestorBD.GestorBD GestorBD;
-  DataSet DsGeneral = new DataSet(), DsPedidos = new DataSet();
+  DataSet DsGeneral = new DataSet(), DsPedidos = new DataSet(); 
   DataSet DsArtículos = new DataSet(), DsPagos = new DataSet();
+  DataSet DsUsuario = new DataSet();
   DataRow fila;
   Comunes comunes = new Comunes();
 
@@ -20,36 +21,37 @@ public partial class ListaPedidosGerente : System.Web.UI.Page
   {
     if (!IsPostBack)
     {
-      DataRow[] filas;
-
       //Recupera los objetos de sesión.
       rfc = Session["RFC"].ToString();
       GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
 
       //Lee los datos del usuario.
       cadSql = "select * from PCUsuarios where Tipo='Cli'";
-      GestorBD.consBD(cadSql, "Usuarios", DsGeneral);
+      GestorBD.consBD(cadSql, "Cliente", DsGeneral);
 
       //Carga los rfc's de los clientes.
-      comunes.cargaDDL(DDLClientes, DsGeneral, "Usuarios", "RFC");
+      comunes.cargaDDL(DDLClientes, DsGeneral, "Cliente", "Nombre");
     }
   }
 
   protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
   {
+    GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
+
     //Lee los datos del usuario.
     cadSql = "select * from PCUsuarios u, PCClientes c where u.RFC='" + DDLClientes.Text +
       "' and u.RFC=c.RFC";
-    GestorBD.consBD(cadSql, "Usuario", DsGeneral);
-    fila = DsGeneral.Tables["Usuario"].Rows[0];
+
+    GestorBD.consBD(cadSql, "Usuario", DsUsuario);
+    fila = DsUsuario.Tables["Usuario"].Rows[0];
 
     //Asigna los valores de fila en la tabla.
-    tblUsuario.Rows[1].Cells[0].Text = rfc;
+    tblUsuario.Rows[1].Cells[0].Text = DDLClientes.Text;
     tblUsuario.Rows[1].Cells[1].Text = fila["Nombre"].ToString();
     tblUsuario.Rows[1].Cells[2].Text = fila["Domicilio"].ToString();
 
     //Carga los folios de los pedidos del cliente elegido.
-    cadSql = "select * from PCPedidos where RFCC='" + rfc + "'";
+    cadSql = "select * from PCPedidos where RFCC='" + DDLClientes.Text + "'";
     GestorBD.consBD(cadSql, "Pedidos", DsPedidos);
     comunes.cargaDDL(DDLPedidos, DsPedidos, "Pedidos", "FolioP");
     Session["DsPedidos"] = DsPedidos;
