@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ListaPedidos.aspx.cs" Inherits="ListaPedidos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="ListaPedidosEmpleado.aspx.cs" Inherits="ListaPedidosEmpleado" %>
 
 <!DOCTYPE html>
 
@@ -7,9 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <style type="text/css">
-        #form1 {
-            height: 584px;
-        }
+
         .auto-style1 {
             width: 97%;
             z-index: 1;
@@ -21,17 +19,19 @@
     </style>
 </head>
 <body>
-    <form id="form1" runat="server" style="background-color: #FF9966">
+    <form id="form1" runat="server">
+    <div>
+    
     <div style="background-color: #FF9933; height: 553px;">
     
         <asp:Label ID="Label2" runat="server" style="z-index: 1; left: 363px; top: 182px; position: absolute" Text="Pedidos:"></asp:Label>
     
-        <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 340px; top: 55px; position: absolute; height: 22px" Text="Información de los pedidos del cliente"></asp:Label>
+        <asp:Label ID="Label1" runat="server" style="z-index: 1; left: 340px; top: 55px; position: absolute; height: 22px" Text="Información de los pedidos del empleado"></asp:Label>
         <asp:Table ID="tblUsuario" runat="server" style="z-index: 1; left: 347px; top: 103px; position: absolute; height: 28px; width: 296px">
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server">RFC</asp:TableCell>
                 <asp:TableCell runat="server">Nombre</asp:TableCell>
-                <asp:TableCell runat="server">Domicilio</asp:TableCell>
+                <asp:TableCell runat="server">Categoria</asp:TableCell>
             </asp:TableRow>
             <asp:TableRow runat="server">
                 <asp:TableCell runat="server"></asp:TableCell>
@@ -49,7 +49,7 @@
                 <asp:TableCell runat="server">Pedido no.</asp:TableCell>
                 <asp:TableCell runat="server">Fecha pedido</asp:TableCell>
                 <asp:TableCell runat="server">Total a pagar</asp:TableCell>
-                <asp:TableCell runat="server">Saldo del cliente</asp:TableCell>
+                <asp:TableCell runat="server">Saldo del pedido</asp:TableCell>
                 <asp:TableCell runat="server">Saldo en facturas</asp:TableCell>
             </asp:TableRow>
             <asp:TableRow runat="server">
@@ -63,7 +63,7 @@
     
         <table class="auto-style1">
             <caption>
-                Productos del pedidos y pagos del cliente</caption>
+                Productos del pedidos y pagos del empleado</caption>
             <tr>
                 <td>
                     <asp:GridView ID="grdArtículos" runat="server">
@@ -75,6 +75,8 @@
                 </td>
             </tr>
         </table>
+    
+    </div>
     
     </div>
     </form>

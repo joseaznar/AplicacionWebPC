@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="MenuInicio.aspx.cs" Inherits="MenuInicio" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AltaPedidoEmpleado.aspx.cs" Inherits="AltaPedidoEmpleado" %>
 
 <!DOCTYPE html>
 
@@ -7,9 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
 </head>
-<body style="height: 427px">
+<body>
     <form id="form1" runat="server">
-    <div style="background-color: #FFCC99; height: 513px;">
+    <div>
     
     </div>
     </form>

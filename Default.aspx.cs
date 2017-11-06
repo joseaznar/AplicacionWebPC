@@ -29,11 +29,17 @@ public partial class _Default : System.Web.UI.Page {
 
   //Si usuario y contraseña son correctos, avanza
   protected void Login1_Authenticate1(object sender, AuthenticateEventArgs e) {
-
+    //Valida y luego redirige a un menu diferente dependiendo el tipo de usuario (empleado o cliente)
     if (valida()) {
       Session["RFC"] = Login1.UserName;
       Session["Tipo"] = getTipo(Session["RFC"].ToString());
-      Response.Redirect("AdminUsuarios.aspx");
+      if (Session["Tipo"].ToString().Equals("Cli")){
+        Response.Redirect("MenuInicioCliente.aspx");
+      }
+      else
+      {
+        Response.Redirect("MenuInicioEmpleado.aspx");
+      }
     }
   }
 
@@ -54,10 +60,10 @@ public partial class _Default : System.Web.UI.Page {
   private String getTipo(String rfc)
   {
     GestorBD = (GestorBD.GestorBD)Session["GestorBD"];
-    cadSql = "select Tipo from PCUsuarios where RFC='" + Login1.UserName;
-    GestorBD.consBD(cadSql, "Tipo", DsGeneral);
+    cadSql = "select * from PCUsuarios where RFC='" + Session["RFC"].ToString() + "'";
+    GestorBD.consBD(cadSql, "Tipos", DsGeneral);
 
-    return DsGeneral.Tables["Tipo"].Rows[0]["Tipo"].ToString();
+    return DsGeneral.Tables["Tipos"].Rows[0]["Tipo"].ToString();
   }
 
 }
